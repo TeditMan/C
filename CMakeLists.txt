@@ -3,11 +3,6 @@ project(C)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(C
+add_executable(Name_1
         Project_1/Problem_2/main.cpp)
 
-add_executable(B
-        Project_1/Problem_4/main.cpp)
-
-add_executable(A
-        Project_2/lab.cpp)

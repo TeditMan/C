@@ -1,7 +1,6 @@
 #include <iostream>
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
     int n, counter_open = 0, counter_close = 0;
     std::cin >> n;
     if (n % 2 != 0) {
@@ -30,4 +29,3 @@ int main() {
     }
     return 0;
 }
-
