@@ -6,3 +6,6 @@ set(CMAKE_CXX_STANDARD 14)
 add_executable(Name_1
         Project_1/Problem_2/main.cpp)
 
+add_executable(Name_2
+        Project_1/Problem_4/main.cpp)
+
