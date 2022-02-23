@@ -1,7 +1,7 @@
 #include <iostream>
 #include <random>
 #include <cassert>
-const int n = 20;
+const int n = 1;
 
 struct PRNG {
     std::mt19937 engine;

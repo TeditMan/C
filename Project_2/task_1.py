@@ -1114,7 +1114,7 @@ array_of_means = [np.mean(array_5x5), np.mean(array_6x6), np.mean(array_7x7), np
                   np.mean(array_18x18), np.mean(array_20x20), np.mean(array_25x25), np.mean(array_30x30),
                   np.mean(array_40x40), np.mean(array_50x50), np.mean(array_60x60), np.mean(array_70x70),
                   np.mean(array_80x80), np.mean(array_90x90), np.mean(array_100x100), np.mean(array_200x200)]
-plt.figure(figsize=(10, 7))
+plt.figure(figsize=(10, 6))
 num_array = [5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100, 200]
 plt.scatter(num_array, array_of_means)
 x = np.arange(0, 202, 0.5)

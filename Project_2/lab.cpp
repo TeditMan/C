@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-    const int width = 20, height = 20;
+    const int width = 3, height = 1;
     int A[n][3], four[4][2] = {{1,0},{-1,0},{0,1},{0,-1}},
     counter = 0, array_of_the_last_step[n][2];
     bool done = false;
