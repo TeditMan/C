@@ -1,7 +1,7 @@
 #include <iostream>
 #include <random>
 #include <cassert>
-const int n = 15;
+const int n = 5;
 
 struct PRNG {
     std::mt19937 engine;
@@ -43,7 +43,7 @@ void check(int A[n][3], bool &done) {
     }
 }
 
-void check_movement(int (&A)[n][3], const int width, const int height, int a_o_t_l_s[n][2]) {
+void check_movement(int (&A)[n][3],const int width, const int height, int a_o_t_l_s[n][2]) {
     for (int i = 0; i < n - 1; i++) {
         int temporary_array[3] = {-1, -1, -1}, k = 0;
         for (int j = i + 1; j < n; j++) {
@@ -51,7 +51,7 @@ void check_movement(int (&A)[n][3], const int width, const int height, int a_o_t
                 temporary_array[k] = j;
                 k += 1;
             }
-            for (int &l : temporary_array) {
+            for (int l : temporary_array) {
                 if (l != -1) {
                     A[l][0] -= a_o_t_l_s[l][0];
                     A[l][1] -= a_o_t_l_s[l][0];
@@ -71,16 +71,9 @@ void check_movement(int (&A)[n][3], const int width, const int height, int a_o_t
             }
         }
     }
-    else if (height == 1) {
-        for (auto & i : A) {
-            if (i[0] == 1 or i[0] == width) {
-                i[2] = 0;
-            }
-        }
-    }
     else {
         for (auto & i : A) {
-            if (i[0] == 1 or i[0] == width or i[1] == 1 or i[1] == height) {
+            if (i[1] == 1 or i[1] == height) {
                 i[2] = 0;
             }
         }
@@ -113,6 +106,12 @@ void do_movement(int (&A)[n][3], int a_four[4][2], PRNG generator, int (&a_o_t_l
             A[i][1] += a_four[var_int][1];
             a_o_t_l_s[i][0] = a_four[var_int][0];
             a_o_t_l_s[i][1] = a_four[var_int][1];
+            if (A[i][0] == 0) {
+                A[i][0] = width;
+            }
+            if (A[i][0] == width + 1) {
+                A[i][0] = 1;
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 import numpy as np
-
+import matplotlib.pyplot as plt
 # width = 10, height = 10, n = 5
 array_x1 = [44, 13, 26, 27, 28, 12, 46, 43, 7, 23, 23, 5, 7, 10, 2, 9, 4, 20, 49,
             11, 26, 14, 54, 2, 14, 25, 7, 16, 0, 6, 19, 5, 9, 26, 35, 1, 38,
@@ -170,3 +170,6 @@ array_x9 = [10444, 1061, 72, 110, 965, 293, 138, 128, 79, 113, 3958, 100, 130, 7
             880, 112, 378, 385, 1735, 610, 29, 84, 4100, 489, 743, 570, 139, 729, 285, 209, 56, 4774,
             230, 151, 1315, 138, 209, 113, 145, 293, 107]
 print(np.mean(array_x1), np.mean(array_x4), np.mean(array_x9))
+plt.hist(array_x1, bins=20, density=True, facecolor='g', alpha=0.75)
+plt.grid(True)
+plt.show()

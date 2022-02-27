@@ -1043,6 +1043,7 @@ array_of_means = [np.mean(array_5x5), np.mean(array_6x6), np.mean(array_7x7), np
                   np.mean(array_18x18), np.mean(array_20x20), np.mean(array_25x25), np.mean(array_30x30),
                   np.mean(array_40x40), np.mean(array_50x50), np.mean(array_60x60), np.mean(array_70x70),
                   np.mean(array_80x80), np.mean(array_90x90), np.mean(array_100x100)]
+array_of_mess = map(np.mean, array_of_means)
 plt.figure(figsize=(10, 6))
 num_array = [5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100]
 for i in range(len(num_array)):

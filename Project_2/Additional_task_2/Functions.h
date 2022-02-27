@@ -1,7 +1,7 @@
 #include <iostream>
 #include <random>
 #include <cassert>
-const int n = 15;
+const int n = 1;
 
 struct PRNG {
     std::mt19937 engine;
@@ -51,7 +51,7 @@ void check_movement(int (&A)[n][3], const int width, const int height, int a_o_t
                 temporary_array[k] = j;
                 k += 1;
             }
-            for (int &l : temporary_array) {
+            for (int l : temporary_array) {
                 if (l != -1) {
                     A[l][0] -= a_o_t_l_s[l][0];
                     A[l][1] -= a_o_t_l_s[l][0];
