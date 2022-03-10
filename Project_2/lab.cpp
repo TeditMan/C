@@ -3,18 +3,13 @@
 using namespace std;
 
 int main() {
-    const int width = 100, height = 1;
+    const int width = 10, height = 10;
     int A[n][3], four[4][2] = {{1,0},{-1,0},{0,1},{0,-1}},
     counter = 0, array_of_the_last_step[n][2];
-    bool done = false;
     PRNG generator;
     for (int ss = 0; ss < 1000; ss++) {
         fill_movement_bool(A);
-        while (!done) {
-            done = true;
-            create_config(A, width, height, generator);
-            check(A, done);
-        }
+        config(A, width, height, generator);
         check_movement(A, width, height, array_of_the_last_step);
         while (!check_completeness(A)) {
             do_movement(A, four, generator, array_of_the_last_step, width, height);
@@ -25,7 +20,6 @@ int main() {
         if (ss % 18 == 0 and ss != 0) {
             cout << '\n';
         }
-        done = false;
         counter = 0;
     }
     cout << "end";

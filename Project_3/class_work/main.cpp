@@ -25,9 +25,18 @@ int main() {
     */
     int a = 0;
     int *ptr_a, *ptr_b;
-    std::cout << &a << " - адрес а в памяти в 16-тиричной системе";
+    // std::cout << &a << " - адрес а в памяти в 16-тиричной системе";
     // heap
     int *d_a = new int(5);
+    for (int i = 0; i < 5; i++) {
+        d_a[i] = 1;
+    }
+    for (int i = 0; i < 5; i++) {
+        d_a[i] = 1;
+    }
+    for (int i = 0; i < 5; i++) {
+        std::cout << d_a[i] << ' ';
+    }
     delete d_a;
     int n;
     std::cin >> n;

@@ -28,3 +28,7 @@ add_executable(Project_2_add_2
         Project_2/Additional_task_2/main.cpp
         )
 
+add_executable(Project_3_3
+        Project_3/class_work_3/main.cpp
+        )
+
