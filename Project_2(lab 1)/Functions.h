@@ -34,6 +34,7 @@ bool check(int A[n][3], int a, int b, int edge) {
     }
     return _bool_;
 }
+
 void config(int (&A)[n][3], const int width, const int height, PRNG generator) {
     initGenerator(generator);
     for (int i = 0; i < n; i++) {
@@ -138,11 +139,5 @@ bool check_completeness(int A[n][3]) {
     }
     else {
         return false;
-    }
-}
-
-void print_A(int A[n][3]) {
-    for (int i = 0; i < n; i++) {
-        std::cout << A[i][0] << "  " << A[i][1] << '\n';
     }
 }
