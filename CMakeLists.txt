@@ -46,3 +46,6 @@ add_executable("lab_2"
 add_executable("sorting"
         "Project_5(sorting)/main.cpp"
 )
+
+add_executable("pointers_and_structs"
+        "Project_6(tasks with pointers and structs)/main.cpp")
