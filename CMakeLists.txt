@@ -4,11 +4,11 @@ project(C)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable("Project_1_Problem_2"
-        "Project_1/Problem_2/main.cpp"
+        "Project_1(first homework)/Problem_2/main.cpp"
         )
 
 add_executable("Project_1_Problem_4"
-        "Project_1/Problem_4/main.cpp"
+        "Project_1(first homework)/Problem_4/main.cpp"
         )
 
 add_executable("lab_1"
@@ -16,11 +16,11 @@ add_executable("lab_1"
         )
 
 add_executable("c_w_1"
-        "Project_3(class works)/class_work_1/main.cpp"
+        "Class_works/class_work_1/main.cpp"
         )
 
 add_executable("c_w_2"
-        "Project_3(class works)/class_work_2/main.cpp"
+        "Class_works/class_work_2/main.cpp"
         )
 
 add_executable("lab_1_add_1"
@@ -32,29 +32,29 @@ add_executable("lab_1_add_2"
         )
 
 add_executable("c_w_3"
-        "Project_3(class works)/class_work_3/main.cpp"
+        "Class_works/class_work_3/main.cpp"
         )
 
 add_executable("c_w_4"
-        "Project_3(class works)/class_work_4/main.cpp"
+        "Class_works/class_work_4/main.cpp"
         )
 
 add_executable("lab_2"
-        "Project_4(lab 2)/1/main.cpp"
+        "Project_3(lab 2)/1/main.cpp"
         )
 
 add_executable("sorting"
-        "Project_5(sorting)/main.cpp"
+        "Project_4(sortings)/main.cpp"
 )
 
 add_executable("pointers_and_structs_1"
-        "Project_6(tasks with pointers and structs)/task_1(single list)/main.cpp")
+        "Project_5(tasks with pointers and structs)/task_1(single list)/main.cpp")
 
 add_executable("pointers_and_structs_2"
-        "Project_6(tasks with pointers and structs)/task_2(double list)/main.cpp")
+        "Project_5(tasks with pointers and structs)/task_2(double list)/main.cpp")
 
 add_executable("pointers_and_structs_3"
-        "Project_6(tasks with pointers and structs)/task_3(stack)/main.cpp")
+        "Project_5(tasks with pointers and structs)/task_3(stack)/main.cpp")
 
 add_executable("pointers_and_structs_4"
-        "Project_6(tasks with pointers and structs)/task_4(queue)/main.cpp")
+        "Project_5(tasks with pointers and structs)/task_4(queue)/main.cpp")
