@@ -47,5 +47,14 @@ add_executable("sorting"
         "Project_5(sorting)/main.cpp"
 )
 
-add_executable("pointers_and_structs"
-        "Project_6(tasks with pointers and structs)/main.cpp")
+add_executable("pointers_and_structs_1"
+        "Project_6(tasks with pointers and structs)/task_1(single list)/main.cpp")
+
+add_executable("pointers_and_structs_2"
+        "Project_6(tasks with pointers and structs)/task_2(double list)/main.cpp")
+
+add_executable("pointers_and_structs_3"
+        "Project_6(tasks with pointers and structs)/task_3(stack)/main.cpp")
+
+add_executable("pointers_and_structs_4"
+        "Project_6(tasks with pointers and structs)/task_4(queue)/main.cpp")

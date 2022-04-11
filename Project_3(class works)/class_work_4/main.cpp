@@ -1,18 +1,44 @@
 #include <iostream>
 
-double cross(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, double &x, double &y) {
-    double r1 = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
-    double r2 = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
-    x = x1 + r1 * (x2 - x1);
-    y = y1 + r2 * (y2 - y1);
+using std::cout;
+using std::cin;
+using std::endl;
+
+int* compress(int **matrix, int n, int m) {
+    int *k = new int, l = 0;
+    int *compressed = new int[*k];
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (matrix[i][j] != 0) {
+                compressed[l] = matrix[i][j];
+                l++;
+            }
+        }
+    }
+    *k = l + 1;
+    return compressed;
 }
 
-struct line {
-    double x, y, x2, y2;
-};
+int main()
+{
+    int n, m;
+    cin >> n >> m;
+    int** a = new int*[n];
+    for (int i = 0; i < n; i++)
+        a[i] = new int[m];
 
-int main() {
-    int M = 15, N = 20;
-    double length_1 = 5.0, length_2 = 10.0
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            cin >> a[i][j];
 
+    int* compressed = compress(a, n, m);
+
+    if (!compressed) return 0;
+
+    for (int i = 0; i < n * 3; i++)
+        cout << compressed[i] << " ";
+    cout << endl;
+
+    delete[] compressed;
+    return 0;
 }
