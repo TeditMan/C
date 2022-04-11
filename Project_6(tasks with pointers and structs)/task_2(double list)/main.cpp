@@ -36,7 +36,13 @@ DoubleList* createList(int *array, unsigned size) {
 }
 
 unsigned length(DoubleList *list) {
-    return list->size;
+    unsigned counter = 0;
+    Node *tmp = list -> head;
+    while (tmp != nullptr) {
+        tmp = tmp -> next;
+        counter += 1;
+    }
+    return counter;
 }
 
 void print_list(DoubleList *list) {

@@ -34,14 +34,20 @@ List* createList(int *array, unsigned size) {
 }
 
 unsigned length(List *list) {
-    return list->size;
+    unsigned counter = 0;
+    Node *tmp = list -> head;
+    while (tmp != nullptr) {
+        tmp = tmp -> next;
+        counter += 1;
+    }
+    return counter;
 }
 
 void print_list(List *list) {
     Node *tmp = list -> head;
     std::cout << "length = " << list -> size << '\n';
     std::cout << tmp -> value << ' ';
-    for (int i = 0; i < list -> size - 1; i++) {
+    for (int i = 0; i < length(list) - 1; i++) {
         tmp = tmp -> next;
         std::cout << tmp -> value << ' ';
     }
@@ -50,9 +56,8 @@ void print_list(List *list) {
 
 void push_back(List *list, int value) {
     Node *new_tail = createNode(value);
-    Node *tmp = list -> tail;
+    list -> tail -> next = new_tail;
     list -> tail = new_tail;
-    tmp -> next = list -> tail;
     list -> size += 1;
 }
 
@@ -81,7 +86,7 @@ void insert(List *list, unsigned idx, int value) {
 
 int pop_back(List *list) {
     Node *tmp = list -> head;
-    for (int i = 0; i < list -> size - 2; i++) {
+    for (int i = 0; i < length(list) - 2; i++) {
         tmp = tmp -> next;
     }
     int tmp_val = tmp -> next -> value;
@@ -163,7 +168,7 @@ int main() {
     remove(list, 2);
     print_list(list);
 
-    std::cout << length(list) << ' ' << get(list, 2);
+    std::cout << "length = " << length(list) << '\n' << "list member with index 2: " << get(list, 2) << '\n';
 
     clear(list);
     return 0;
