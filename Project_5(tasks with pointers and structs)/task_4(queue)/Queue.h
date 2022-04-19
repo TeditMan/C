@@ -116,20 +116,3 @@ void clear(Queue *queue) {
     queue->head = nullptr;
     queue->tail = nullptr;
 }
-
-int main() {
-    int array[6] = {1, 2, 3, 4, 5, 6};
-    Queue *queue = createQueue(array, 6);
-    print(queue);
-
-    enQueue(queue, 7);
-    print(queue);
-
-    deQueue(queue);
-    print(queue);
-
-    std::cout << front(queue) << ' ' << rear(queue) << ' ' << length(queue);
-
-    clear(queue);
-    return 0;
-}

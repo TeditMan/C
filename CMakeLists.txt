@@ -39,8 +39,12 @@ add_executable("c_w_4"
         "Class_works/class_work_4/main.cpp"
         )
 
+add_executable("c_w_5"
+        "Class_works/class_work_5/main.cpp"
+        )
+
 add_executable("lab_2"
-        "Project_3(lab 2)/1/main.cpp"
+        "Project_3(lab 2)/task_1/main.cpp"
         )
 
 add_executable("sorting"
