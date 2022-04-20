@@ -62,3 +62,21 @@ add_executable("pointers_and_structs_3"
 
 add_executable("pointers_and_structs_4"
         "Project_5(tasks with pointers and structs)/task_4(queue)/main.cpp")
+
+add_executable("greedy_1"
+        "Project_6(tasks with greedy algorithms)/task_1/main.cpp")
+
+add_executable("greedy_2"
+        "Project_6(tasks with greedy algorithms)/task_2/main.cpp")
+
+add_executable("greedy_3"
+        "Project_6(tasks with greedy algorithms)/task_3/main.cpp")
+
+add_executable("greedy_4"
+        "Project_6(tasks with greedy algorithms)/task_4/main.cpp")
+
+add_executable("greedy_5"
+        "Project_6(tasks with greedy algorithms)/task_5/main.cpp")
+
+add_executable("greedy_6"
+        "Project_6(tasks with greedy algorithms)/task_6/main.cpp")

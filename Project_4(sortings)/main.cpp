@@ -1,41 +1,38 @@
 #include <iostream>
-
 void swap(int &a, int &b) {
     int temp = a;
     a = b;
     b = temp;
 }
 
-void qsort(int *array, int n) {
-    int l = 0, r = n - 1, k = n / 2, rep = array[k];
+void print_array(int const *array, unsigned n) {
+    std::cout << '[' << array[0];
+    for (unsigned i = 1; i < n; i++) {
+        std::cout << ", "<< array[i];
+    }
+    std::cout << ']' << std::endl;
+}
+
+void qsort(int *array, unsigned n) {
     if (n < 2) {
         return;
     }
-    do {
-        while (array[l] < rep) {
-            l++;
+    unsigned left_pointer = 0, right_pointer = n - 2;
+    int ref = array[n - 1];
+    while (left_pointer < right_pointer or (n == 2 and left_pointer == right_pointer and left_pointer <= ref)) {
+        while (array[left_pointer] <= ref and left_pointer < n - 1) {
+            left_pointer++;
         }
-        while (array[r] > rep) {
-            r--;
+        while (array[right_pointer] > ref and right_pointer > 0) {
+            right_pointer--;
         }
-        if (l < k and r > k) {
-            swap(array[l], array[r]);
+        if (left_pointer < right_pointer) {
+            swap(array[left_pointer], array[right_pointer]);
         }
-        else if (l == k and r > k) {
-            swap(array[k], array[r]);
-            swap(array[r], array[k + 1]);
-            k += 1;
-            l += 1;
-        }
-        else if (l < k and r == k) {
-            swap(array[k], array[l]);
-            swap(array[l], array[k - 1]);
-            k -= 1;
-            r -= 1;
-        }
-    } while (l < r);
-    qsort(array, k);
-    qsort(array + k + 1, n - k - 1);
+    }
+    swap(array[left_pointer], array[n - 1]);
+    qsort(array, left_pointer);
+    qsort(array + left_pointer + 1, n - left_pointer - 1);
 }
 
 void heap_sort(int *array, int n) {
@@ -99,18 +96,12 @@ void heap_sort(int *array, int n) {
 int main() {
     int arr[20] = {1, 5, 2, 45, 7, 8, 9, 10, 5, 6, 7,
                    8, 9, 0, 13, 31, 73, 43, 19, 21};
-    for (int i : arr) {
-        std::cout << i << ' ';
-    }
-    std::cout << '\n';
+    print_array(arr, 20);
+
     qsort(arr, 20);
-    for (int i : arr) {
-        std::cout << i << ' ';
-    }
-    std::cout << '\n';
+    print_array(arr, 20);
+
     heap_sort(arr, 20);
-    for (int i : arr) {
-        std::cout << i << ' ';
-    }
+    print_array(arr, 20);
     return 0;
 }
