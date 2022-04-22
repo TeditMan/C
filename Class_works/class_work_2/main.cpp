@@ -1,7 +1,6 @@
 #include <iostream>
 
-
-unsigned long long pow(unsigned long long a, int i) {
+unsigned long long pow(unsigned long long a, unsigned i) {
     unsigned long long counter = 1;
     for (int j = 0; j < i; j++) {
         counter *= a;
@@ -9,21 +8,40 @@ unsigned long long pow(unsigned long long a, int i) {
     return counter;
 }
 
-
-unsigned long long check(unsigned long long n) {
-    int i = 1;
-    while (n % pow(2, i) == 0 and (n % pow(2, i + 1)) == 0 and n >= pow(2, i + 1)) {
-        i += 1;
+unsigned greatest_power(unsigned long long a) {
+    unsigned counter = 1;
+    while (a >= pow(2, counter)) {
+        counter++;
     }
-    return i;
+    return --counter;
+}
+
+unsigned long long calculate_power_of_2(unsigned power) {
+    unsigned long long sum = power;
+    power -= 1;
+    unsigned counter = 0;
+    while (power > 0) {
+        sum += pow(2, counter) * power;
+        power--;
+        counter++;
+    }
+    return sum;
+}
+
+void calculate(unsigned long long a, unsigned long long &sum) {
+    if (a < 2) {
+        return;
+    }
+    unsigned tmp_1 = greatest_power(a);
+    unsigned long long tmp_2 = calculate_power_of_2(tmp_1);
+    sum += tmp_2;
+    calculate(a - pow(2, tmp_1), sum);
 }
 
 int main() {
-    unsigned long long n, counter = 0;
+    unsigned long long n, sum = 0;
     std::cin >> n;
-    for (unsigned i = 2; i <= n; i += 2) {
-        counter += check(i);
-    }
-    std::cout << counter;
+    calculate(n, sum);
+    std::cout << sum;
     return 0;
 }

@@ -80,3 +80,6 @@ add_executable("greedy_5"
 
 add_executable("greedy_6"
         "Project_6(tasks with greedy algorithms)/task_6/main.cpp")
+
+add_executable("dynamic_1"
+        "Project_7(tasks with dynamic programming)/task_1.cpp")

@@ -42,16 +42,20 @@ List* createList(int *array, unsigned size) {
     }
 }
 
+unsigned length(List *list) {
+    return list->size;
+}
+
 void print_list(List *list) {
-    std::cout << "length = " << list->size << '\n';
-    if (list->size == 0) {
+    std::cout << "length = " << length(list) << '\n';
+    if (length(list) == 0) {
         std::cout << "empty list";
         std::cout << "\n\n";
     }
     else {
         Node *tmp = list->head;
         std::cout << '[' << tmp->value;
-        for (int i = 0; i < list->size - 1; i++) {
+        for (int i = 0; i < length(list) - 1; i++) {
             tmp = tmp->next;
             std::cout << ", " << tmp->value;
         }
@@ -59,44 +63,40 @@ void print_list(List *list) {
     }
 }
 
-unsigned length(List *list) {
-    return list->size;
-}
-
 void push_back(List *list, int value) {
     Node *new_node = createNode(value);
-    if (list->size == 0) {
+    if (length(list) == 0) {
         list->head = new_node;
         list->tail = new_node;
-        list->size += 1;
+        list->size++;
     }
     else {
         list->tail->next = new_node;
         list->tail = new_node;
-        list->size += 1;
+        list->size++;
     }
 }
 
 void push_front(List *list, int value) {
     Node *new_node = createNode(value);
-    if (list->size == 0) {
+    if (length(list) == 0) {
         list->head = new_node;
         list->tail = new_node;
-        list->size += 1;
+        list->size++;
     }
     else {
         new_node->next = list->head;
         list->head = new_node;
-        list->size += 1;
+        list->size++;
     }
 }
 
 void insert(List *list, unsigned idx, int value) {
-    assert(idx < list->size + 1 && "index out of range");
+    assert(idx < length(list) + 1 && "index out of range");
     if (idx == 0) {
         push_front(list, value);
     }
-    else if (idx == list->size) {
+    else if (idx == length(list)) {
         push_back(list, value);
     }
     else {
@@ -108,60 +108,52 @@ void insert(List *list, unsigned idx, int value) {
         Node *tmp_2 = tmp_1->next;
         tmp_1->next = new_node;
         new_node->next = tmp_2;
-        list->size += 1;
+        list->size++;
     }
 }
 
 int pop_back(List *list) {
-    assert(list->size > 0 && "empty list");
-    if (list->size == 1) {
-        int tmp_val = list->head->value;
-        delete list->head;
+    assert(length(list) > 0 && "empty list");
+    int tmp_val = list->tail->value;
+    delete list->tail;
+    if (length(list) == 1) {
         list->head = nullptr;
         list->tail = nullptr;
-        list->size -= 1;
-        return tmp_val;
     }
     else {
         Node *tmp = list->head;
-        for (int i = 0; i < list->size - 2; i++) {
+        for (int i = 0; i < length(list) - 2; i++) {
             tmp = tmp->next;
         }
-        int tmp_val = list->tail->value;
-        delete list->tail;
         tmp->next = nullptr;
         list->tail = tmp;
-        list->size -= 1;
-        return tmp_val;
     }
+    list->size--;
+    return tmp_val;
 }
 
 int pop_front(List *list) {
-    assert(list->size > 0 && "empty list");
-    if (list->size == 1) {
-        int tmp_val = list->head->value;
-        delete list->head;
+    assert(length(list) > 0 && "empty list");
+    int tmp_val = list->head->value;
+    delete list->head;
+    if (length(list) == 1) {
         list->head = nullptr;
         list->tail = nullptr;
-        list->size -= 1;
-        return tmp_val;
     }
     else {
         Node *new_head = list->head->next;
-        int tmp_val = list->head->value;
-        delete list->head;
         list->head = new_head;
-        list->size -= 1;
-        return tmp_val;
     }
+    list->size--;
+    return tmp_val;
 }
 
 int remove(List *list, unsigned idx) {
-    assert(idx < list->size && "index out of range");
+    assert(idx < length(list) && "index out of range");
     if (idx == 0) {
         return pop_front(list);
     }
-    else if (idx == list->size - 1) {
+    else if (idx == length(list) - 1) {
         return pop_back(list);
     }
     else {
@@ -173,13 +165,13 @@ int remove(List *list, unsigned idx) {
         int tmp_val = tmp_del->value;
         tmp->next = tmp_del->next;
         delete tmp_del;
-        list->size -= 1;
+        list->size--;
         return tmp_val;
     }
 }
 
 int get(List *list, unsigned idx) {
-    assert(idx < list->size && "index is out of range");
+    assert(idx < length(list) && "index is out of range");
     Node *tmp = list->head;
     for (unsigned i = 0; i < idx; i++) {
         tmp = tmp->next;

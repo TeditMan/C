@@ -1,4 +1,5 @@
 #include <iostream>
+
 void swap(int &a, int &b) {
     int temp = a;
     a = b;
@@ -18,12 +19,11 @@ void qsort(int *array, unsigned n) {
         return;
     }
     unsigned left_pointer = 0, right_pointer = n - 2;
-    int ref = array[n - 1];
-    while (left_pointer < right_pointer or (n == 2 and left_pointer == right_pointer and left_pointer <= ref)) {
-        while (array[left_pointer] <= ref and left_pointer < n - 1) {
+    while (left_pointer < right_pointer or (n == 2 and left_pointer == right_pointer and array[0] <= array[1])) {
+        while (array[left_pointer] <= array[n - 1] and left_pointer < n - 1) {
             left_pointer++;
         }
-        while (array[right_pointer] > ref and right_pointer > 0) {
+        while (array[right_pointer] > array[n - 1] and right_pointer > 0) {
             right_pointer--;
         }
         if (left_pointer < right_pointer) {
