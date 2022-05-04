@@ -1,98 +1,67 @@
 #include <iostream>
 #include <cassert>
+#include <vector>
+#include <algorithm>
+#include <sstream>
+using namespace std;
 
-using std::cout;
-using std::cin;
-using std::endl;
-
-struct Node {
-    int value = 0;
-    Node *next = nullptr;
+struct Thread {
+    unsigned start = 0;
+    unsigned end = 0;
+    unsigned length = end - start;
 };
 
-struct List {
-    unsigned size = 0;
-    Node *head = nullptr;
-    Node *tail = nullptr;
-};
-
-Node* createNode(int value) {
-    Node *tmp = new Node{value, nullptr};
-    return tmp;
+vector<string> split(const string& text) {
+    istringstream is(text);
+    string word;
+    vector<string> vs;
+    while (is >> word) vs.push_back(word);
+    return vs;
 }
 
-unsigned length(List *list) {
-    return list->size;
+void swap(unsigned &a, unsigned &b) {
+    unsigned temp = a;
+    a = b;
+    b = temp;
 }
 
-void push_back(List *list, int value) {
-    Node *new_node = createNode(value);
-    if (list->size == 0) {
-        list->head = new_node;
-        list->tail = new_node;
-        list->size += 1;
+void qsort(unsigned *array, unsigned size) {
+    if (size < 2) {
+        return;
     }
-    else {
-        list->tail->next = new_node;
-        list->tail = new_node;
-        list->size += 1;
-    }
-}
-
-int get(List *list, unsigned idx) {
-    assert(idx < list->size && "index is out of range");
-    Node *tmp = list->head;
-    for (unsigned i = 0; i < idx; i++) {
-        tmp = tmp->next;
-    }
-    return tmp->value;
-}
-
-int* compress(int **matrix, int n, int m) {
-    List *array = new List;
-    unsigned counter = 0;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            if (matrix[i][j] != 0) {
-                push_back(array, matrix[i][j]);
-                counter += 1;
-            }
+    unsigned left_pointer = 0, right_pointer = size - 2;
+    while (left_pointer < right_pointer or (size == 2 and left_pointer == right_pointer and array[0] <= array[1])) {
+        while (array[left_pointer] <= array[size - 1] and left_pointer < size - 1) {
+            left_pointer++;
         }
-        if (counter != 3) {
-            return nullptr;
+        while (array[right_pointer] > array[size - 1] and right_pointer > 0) {
+            right_pointer--;
         }
-        counter = 0;
+        if (left_pointer < right_pointer) {
+            swap(array[left_pointer], array[right_pointer]);
+        }
     }
-    for (unsigned i = 0; i < n; i++) {
-        delete matrix[i];
-    }
-    delete[] matrix;
-    int *compressed = new int[length(array)];
-    for (unsigned i = 0; i < length(array); i++) {
-        compressed[i] = get(array, i);
-    }
-    return compressed;
+    swap(array[left_pointer], array[size - 1]);
+    qsort(array, left_pointer);
+    qsort(array + left_pointer + 1, size - left_pointer - 1);
+}
+
+unsigned get_max_length(unsigned *nails, unsigned size) {
+
 }
 
 int main() {
-    int n, m;
-    cin >> n >> m;
-    int **a = new int *[n];
-    for (int i = 0; i < n; i++)
-        a[i] = new int[m];
+    string a_string;
+    getline(cin, a_string);
+    vector<string> vector_array = split(a_string);
+    assert(2 <= vector_array.size() and  vector_array.size() <= 100);
+    auto *nails = new unsigned[vector_array.size()];
+    for (unsigned i = 0; i < vector_array.size(); i++) {
+        nails[i] = stoi(vector_array[i]);
+        assert(nails[i] <= 10000);
+    }
+    qsort(nails, vector_array.size());
 
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < m; j++)
-            cin >> a[i][j];
-
-    int *compressed = compress(a, n, m);
-
-    if (!compressed) return 0;
-
-    for (int i = 0; i < n * 3; i++)
-        cout << compressed[i] << " ";
-    cout << endl;
-
-    delete[] compressed;
+    vector<Thread> array_of_threads;
     return 0;
 }

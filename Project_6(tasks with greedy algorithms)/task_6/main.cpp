@@ -1,6 +1,7 @@
 //
 // Created by User on 19.04.2022.
 //
+#pragma ide diagnostic ignored "misc-no-recursion"
 #include <iostream>
 
 void swap(unsigned &a, unsigned &b) {
@@ -49,7 +50,6 @@ unsigned amount_of_variants(unsigned *array_of_nominal, unsigned length_of_array
     }
     return counter;
 }
-
 int main() {
     unsigned array_of_nominal[5] = {50, 25, 10, 5, 1}, n;
     std::cin >> n;
