@@ -67,12 +67,15 @@ unsigned longest_subsequence(List *sequence) {
     return q;
 }
 
+unsigned longest_subsequence_1(List *sequence) {
+
+}
+
 int main() {
     string string_1;
     getline(cin, string_1);
     unsigned n = stoi(string_1);
     assert(n < 100);
-
     string string_2;
     getline(cin, string_2);
     vector<string> vector_array = split(string_2);
@@ -81,6 +84,7 @@ int main() {
         sequence[i] = stoi(vector_array[i]);
     }
     List *sequence_l = createList(sequence, n);
+
 
     std::cout << longest_subsequence(sequence_l);
     return 0;
