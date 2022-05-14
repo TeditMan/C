@@ -77,3 +77,15 @@ add_executable("dynamic_1"
 
 add_executable("dynamic_2"
         "Project_7(tasks with dynamic programming)/task_2.cpp")
+
+add_executable("dynamic_1c"
+        "Project_7(tasks with dynamic programming)/task_1(contest).cpp")
+
+add_executable("dynamic_2c"
+        "Project_7(tasks with dynamic programming)/task_2(contest).cpp")
+
+add_executable("dynamic_3c"
+        "Project_7(tasks with dynamic programming)/task_3(contest).cpp")
+
+add_executable("dynamic_4c"
+        "Project_7(tasks with dynamic programming)/task_4(contest).cpp")
