@@ -3,7 +3,6 @@
 #include <cassert>
 #include <iostream>
 using namespace std;
-
 vector<string> split(const string& text) {
     istringstream is(text);
     string word;
@@ -12,160 +11,11 @@ vector<string> split(const string& text) {
     return vs;
 }
 
-struct Node {
-    int value;
-    Node *next;
-};
-
-struct List {
-    unsigned size = 0;
-    Node *head = nullptr;
-    Node *tail = nullptr;
-};
-
-Node* createNode(int value) {
-    Node *tmp = new Node{value, nullptr};
-    return tmp;
-}
-
-unsigned length(List *list) {
-    return list->size;
-}
-
-void push_back(List *list, int value) {
-    Node *new_node = createNode(value);
-    if (length(list) == 0) {
-        list->head = new_node;
-        list->tail = new_node;
-        list->size++;
-    }
-    else {
-        list->tail->next = new_node;
-        list->tail = new_node;
-        list->size++;
-    }
-}
-
-void push_front(List *list, int value) {
-    Node *new_node = createNode(value);
-    if (length(list) == 0) {
-        list->head = new_node;
-        list->tail = new_node;
-        list->size++;
-    }
-    else {
-        new_node->next = list->head;
-        list->head = new_node;
-        list->size++;
-    }
-}
-
-void insert(List *list, unsigned idx, int value) {
-    assert(idx < length(list) + 1 && "index out of range");
-    if (idx == 0) {
-        push_front(list, value);
-    }
-    else if (idx == length(list)) {
-        push_back(list, value);
-    }
-    else {
-        Node *new_node = createNode(value);
-        Node *tmp_1 = list->head;
-        for (int i = 0; i < idx - 1; i++) {
-            tmp_1 = tmp_1->next;
-        }
-        Node *tmp_2 = tmp_1->next;
-        tmp_1->next = new_node;
-        new_node->next = tmp_2;
-        list->size++;
-    }
-}
-
-int pop_back(List *list) {
-    assert(length(list) > 0 && "empty list");
-    int tmp_val = list->tail->value;
-    delete list->tail;
-    if (length(list) == 1) {
-        list->head = nullptr;
-        list->tail = nullptr;
-    }
-    else {
-        Node *tmp = list->head;
-        for (int i = 0; i < length(list) - 2; i++) {
-            tmp = tmp->next;
-        }
-        tmp->next = nullptr;
-        list->tail = tmp;
-    }
-    list->size--;
-    return tmp_val;
-}
-
-int pop_front(List *list) {
-    assert(length(list) > 0 && "empty list");
-    int tmp_val = list->head->value;
-    delete list->head;
-    if (length(list) == 1) {
-        list->head = nullptr;
-        list->tail = nullptr;
-    }
-    else {
-        Node *new_head = list->head->next;
-        list->head = new_head;
-    }
-    list->size--;
-    return tmp_val;
-}
-
-int remove(List *list, unsigned idx) {
-    assert(idx < length(list) && "index out of range");
-    if (idx == 0) {
-        return pop_front(list);
-    }
-    else if (idx == length(list) - 1) {
-        return pop_back(list);
-    }
-    else {
-        Node *tmp = list->head;
-        for (int i = 0; i < idx - 1; i++) {
-            tmp = tmp->next;
-        }
-        Node *tmp_del = tmp->next;
-        int tmp_val = tmp_del->value;
-        tmp->next = tmp_del->next;
-        delete tmp_del;
-        list->size--;
-        return tmp_val;
-    }
-}
-
-int get(List *list, unsigned idx) {
-    assert(idx < length(list) && "index is out of range");
-    Node *tmp = list->head;
-    for (unsigned i = 0; i < idx; i++) {
-        tmp = tmp->next;
-    }
-    return tmp->value;
-}
-
-void clear(List *list) {
-    Node *tmp_1 = list->head, *tmp_2;
-    while (tmp_1 != nullptr) {
-        tmp_2 = tmp_1->next;
-        delete tmp_1;
-        tmp_1 = tmp_2;
-    }
-    list->size = 0;
-    list->head = nullptr;
-    list->tail = nullptr;
-}
-
 void swap(unsigned &a, unsigned &b) {
     unsigned temp = a;
     a = b;
     b = temp;
 }
-
 void qsort(int *array, unsigned size) {
     if (size < 2) {
         return;
@@ -187,67 +37,41 @@ void qsort(int *array, unsigned size) {
     qsort(array + left_pointer + 1, size - left_pointer - 1);
 }
 
-unsigned min_length(List *lengths) {
-    if (length(lengths) < 2) {
+int min_length_c(int*, unsigned, int*);
+int min_length_nc(int*, unsigned, int*);
+
+int min_length_nc(int *nails, unsigned size, int *table_m) {
+    return min_length_c(nails + 1, size - 1, table_m) + (nails[1] - nails[0]);
+}
+int min_length_c(int *nails, unsigned size, int *table_m) {
+    if (table_m[size] >= 0) {
+        return table_m[size];
+    }
+    if (size == 2) {
+        int tmp = nails[1] - nails[0];
+        table_m[size] = tmp;
+        return tmp;
+    }
+    if (size == 1) {
+        table_m[size] = 0;
         return 0;
     }
-    unsigned q = 10000, initial_length = length(lengths);
-    for (unsigned i = 0; i < initial_length; i++) {
-        int tmp = get(lengths, i), prev = 0, next = 0;
-        if (i > 0) {
-            prev = get(lengths, i - 1);
-        }
-        if (i < length(lengths) - 1) {
-            next = get(lengths, i + 1);
-        }
-
-        if (i == 0) {
-            remove(lengths, i);
-            remove(lengths, i);
-        }
-        else if (i == length(lengths) - 1) {
-            remove(lengths, i);
-            remove(lengths, i - 1);
-        }
-        else {
-            remove(lengths, i - 1);
-            remove(lengths, i - 1);
-            remove(lengths, i - 1);
-        }
-
-        q = std::min(q, min_length(lengths) + prev + next);
-
-        if (i == 0) {
-            insert(lengths, 0, next);
-            insert(lengths, 0, tmp);
-        }
-        else if (i == length(lengths) - 1) {
-            insert(lengths, length(lengths), tmp);
-            insert(lengths, length(lengths), next);
-        }
-        else {
-            insert(lengths, i - 1, next);
-            insert(lengths, i - 1, tmp);
-            insert(lengths, i - 1, prev);
-        }
-    }
-    return q;
+    int a = min_length_nc(nails + 1, size - 1, table_m);
+    int b = min_length_c(nails + 1, size - 1, table_m) + (nails[1] - nails[0]);
+    int result = min(a, b);
+    table_m[size] = result;
+    return result;
 }
 
 unsigned get_min_length(int *nails, unsigned size) {
-    if (size == 2) {
-        return nails[1] - nails[0];
+    qsort(nails, size);
+    int *table_m = new int[size + 1];
+    for (unsigned i = 0; i <= size; i++) {
+        table_m[i] = -1;
     }
-    else {
-        qsort(nails, size);
-        List *lengths = new List;
-        for (unsigned i = 0; i < size - 3; i++) {
-            push_back(lengths, nails[i + 2] - nails[i + 1]);
-        }
-        unsigned answer = min_length(lengths);
-        clear(lengths);
-        return answer + nails[1] - nails[0] + nails[size - 1] - nails[size - 2];
-    }
+    unsigned answer = min_length_c(nails + 1, size - 1, table_m) + nails[1] - nails[0];
+    delete[] table_m;
+    return answer;
 }
 
 int main() {
