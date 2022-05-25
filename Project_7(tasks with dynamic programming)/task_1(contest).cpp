@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-vector<string> split(const string& text) {
+vector<string> split(const string &text) {
     istringstream is(text);
     string word;
     vector<string> vs;

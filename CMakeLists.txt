@@ -89,3 +89,15 @@ add_executable("dynamic_3c"
 
 add_executable("dynamic_4c"
         "Project_7(tasks with dynamic programming)/task_4(contest).cpp")
+
+add_executable("stack_1"
+        "Project_8(stack tasks)/task_1.cpp")
+
+add_executable("tree_1"
+        "Project_9(tree tasks)/task_1.cpp")
+
+add_executable("end"
+        "Project_10(end)/end_1.cpp")
+
+add_executable("end_2"
+        "Project_10(end)/end_2.cpp")
